@@ -15,32 +15,7 @@ class CoEmbedding(BaseEstimator, TransformerMixin):
 	def __init__(self, n_embeddings=100, K=20, max_iter=10, batch_size=1000,
 				 init_std=0.01, dtype='float32', n_jobs=8, random_state=None,
 				 save_params=False, save_dir='.', verbose=False, **kwargs):
-		'''
-		Parameters
-		---------
-		n_embeddings : int
-			Dimensionality of embeddings
-		max_iter : int
-			Maximal number of iterations to perform
-		batch_size: int
-			Batch size to perform parallel update
-		init_std: float
-			The latent factors will be initialized as Normal(0, init_std**2)
-		dtype: str or type
-			Data-type for the parameters, default 'float32' (np.float32)
-		n_jobs: int
-			Number of parallel jobs to update latent factors
-		random_state : int or RandomState
-			Pseudo random number generator used for sampling
-		save_params: bool
-			Whether to save parameters after each iteration
-		save_dir: str
-			The directory to save the parameters
-		verbose : bool
-			Whether to show progress during model fitting
-		**kwargs: dict
-			Model hyperparameters
-		'''
+		
 		self.n_embeddings = n_embeddings
 		self.n_topics = K
 		self.max_iter = max_iter
@@ -61,14 +36,7 @@ class CoEmbedding(BaseEstimator, TransformerMixin):
 		self._parse_kwargs(**kwargs)
 
 	def _parse_kwargs(self, **kwargs):
-		''' Model hyperparameters
-		Parameters
-		---------
-		lambda: float
-			Regularization parameter.
-		c0, c1: float
-			Confidence for 0 and 1 in Hu et al., c0 must be less than c1
-		'''
+		
 		self.lam_sparse_d = float(kwargs.get('lam_sparse_d', 1e-5))
 		self.lam_sparse = float(kwargs.get('lam_sparse', 1e-5))
 		self.lam_d = float(kwargs.get('lam_d', 1e0))
@@ -90,14 +58,7 @@ class CoEmbedding(BaseEstimator, TransformerMixin):
 
 	def fit(self, X, M, voca_pt):
 		'''Fit the model to the data in X.
-		Parameters
-		----------
-		X : scipy.sparse.csr_matrix, shape (n_docs, n_words)
-			Training click matrix.
-		M : scipy.sparse.csr_matrix, shape (n_words, n_words)
-			Training co-occurrence matrix.
-			
-		voca_pt : vocabulary file pointer string
+		
 		'''
 		self._read_vocab(voca_pt)
 		n_docs, n_words = X.shape
