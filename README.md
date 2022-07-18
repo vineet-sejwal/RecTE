@@ -10,3 +10,7 @@ In Django, model.py definitive source of information about the data. It contains
 These python file translate the word into id in documents by creating a dictionary with words and indexing for both target and source users/items.
 
 ## CoEmbedding.py
+This pytohn file creates the topic embedding using word embedding and topic modeling.
+
+## views.py
+A view function, or view for short, is a Python function that takes a web request and returns a web response. This response can be the HTML contents of a web page, or a redirect, or a 404 error, or an XML document, or an image . . . or anything, really. The view itself contains whatever arbitrary logic is necessary to return that response. This code can live anywhere you want, as long as it’s on your Python path. There’s no other requirement. For the sake of putting the code somewhere, the convention is to put views in a file called views.py, placed in your project or application directory. The view file is therefore the main file of the program.
